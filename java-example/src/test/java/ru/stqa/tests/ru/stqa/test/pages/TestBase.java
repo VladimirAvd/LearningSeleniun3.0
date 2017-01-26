@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.openqa.selenium.By;
 import org.openqa.selenium.InvalidElementStateException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.NoSuchElementException;
@@ -27,6 +28,15 @@ public class TestBase {
             return false;
         }
 
+    }
+
+    public boolean isElementNotPresent(WebElement we, By locator) {
+        try {
+            driver.manage().timeouts().implicitlyWait(0,TimeUnit.SECONDS);
+            return we.findElements(locator).size() == 0;
+        } finally {
+            driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+        }
     }
 
     public boolean isElementNotPresent(By locator) {
