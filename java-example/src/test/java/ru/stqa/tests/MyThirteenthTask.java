@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.stqa.tests.ru.stqa.test.pages.TestBase;
 
@@ -22,15 +23,18 @@ public class MyThirteenthTask extends TestBase {
 
         WebElement menuRow;
         //#box-campaigns img
-        //#box-most-popular
-        driver.findElement(By.cssSelector("#box-most-popular")).click();
+        //#box-most-popular img
+        driver.findElement(By.cssSelector("#box-most-popular img")).click();
         if (!isElementNotPresent(By.cssSelector(".information .options"))) {
-            // Есть Select
-            driver.findElement(By.cssSelector(".information .options")).click();
-            menuRows = driver.findElements(By.cssSelector("[class=buy_now] option"));
-            // Выбор Small
-            menuRows.get(1).click();
-            driver.findElement(By.cssSelector(".information .options")).click();
+            // Select (новый вариант)
+            Select selectSize = new Select(driver.findElement(By.cssSelector(".information select")));
+            selectSize.selectByIndex(1);
+            // Select (Старый вариант)
+//            driver.findElement(By.cssSelector(".information .options")).click();
+//            menuRows = driver.findElements(By.cssSelector("[class=buy_now] option"));
+//            // Выбор Small
+//            menuRows.get(1).click();
+//            driver.findElement(By.cssSelector(".information .options")).click();
         }
         // На всяк пожарный
         if (0 == driver.findElement(By.cssSelector(".quantity>input")).getAttribute("value").compareTo("0")){
@@ -74,7 +78,6 @@ public class MyThirteenthTask extends TestBase {
     public void MyThirteenthTask() throws Exception{
         // Вход
         driver.get("http://localhost/litecart/");
-
         for (int i = 0; i < 3; i++) {
             addProd();
         }
