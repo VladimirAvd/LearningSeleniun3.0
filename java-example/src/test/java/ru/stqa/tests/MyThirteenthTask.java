@@ -71,6 +71,7 @@ public class MyThirteenthTask extends TestBase {
 
 
     @Test
+    public void MyThirteenthTask() throws Exception{
         // Вход
         driver.get("http://localhost/litecart/");
 
