@@ -14,27 +14,15 @@ import static org.junit.Assert.assertTrue;
  * Created by Vladimir on 26.01.2017.
  */
 public class MyTenthTask extends TestBase {
-//    private String getStrAtr(String locator){
-//        WebElement menuRow;
-//        menuRow = driver.findElement(By.cssSelector(locator));
-//        return menuRow.getAttribute("textContent");
-//    }
+//    private void showProd(ProdDuck prod){
+//        System.out.println("PD Name -> " +prod.getName());
+//        System.out.println("PD Price -> " +prod.getPrice());
+//        System.out.println("PD Color -> " +prod.getColor());
+//        System.out.println("PD Size -> " +prod.getSize());
 //
-//    private String getStrCss(String locator, String prop){
-//        WebElement menuRow;
-//        menuRow = driver.findElement(By.cssSelector(locator));
-//        return menuRow.getCssValue(prop);
+//        System.out.println("PD TextDeclar -> " +prod.getTextDeclar());
+//        System.out.println("PD TextWeight -> " +prod.getTextWeight());
 //    }
-
-    private void showProd(ProdDuck prod){
-        System.out.println("PD Name -> " +prod.getName());
-        System.out.println("PD Price -> " +prod.getPrice());
-        System.out.println("PD Color -> " +prod.getColor());
-        System.out.println("PD Size -> " +prod.getSize());
-
-        System.out.println("PD TextDeclar -> " +prod.getTextDeclar());
-        System.out.println("PD TextWeight -> " +prod.getTextWeight());
-    }
 
     private int foundNumberPrice(String prodLocator, ProdDuck prod){
         int result =1;
@@ -96,7 +84,7 @@ public class MyTenthTask extends TestBase {
 
 // Если мы хотим использовать код для проверки раздела Campaigns
      //   boxLabel = "#box-most-popular";
-                boxLabel = "#box-campaigns";
+        boxLabel = "#box-campaigns";
 
         String mColorGrey = "rgba(119, 119, 119, 1)";
         String mColorRed = "rgba(204, 0, 0, 1)";
@@ -149,7 +137,6 @@ public class MyTenthTask extends TestBase {
                    // то в итоге проверка 2х цен
                    priceLabel = " .price";
                    fillProd(boxLabel, priceLabel, beforeFirstPrice);
-                   showProd(beforeFirstPrice);
                    // CLICK!!!
                    driver.findElement(By.cssSelector(boxLabel+" img")).click();
                    //     boxLabel = "#box-most-popular";
@@ -157,7 +144,6 @@ public class MyTenthTask extends TestBase {
                    afterFirstPrice = new ProdDuck().setName(driver.findElement(By.cssSelector(boxLabel+" h1"))
                            .getAttribute("textContent"));
                    fillProd(boxLabel, priceLabel, afterFirstPrice);
-                   showProd(afterFirstPrice);
 
                    checkOne(beforeFirstPrice,afterFirstPrice,mColorGrey,mtxtGreyDeclar,mtxtGreyWeight);
                }
