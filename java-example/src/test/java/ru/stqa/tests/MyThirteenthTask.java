@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import ru.stqa.tests.ru.stqa.test.pages.TestBase;
+import ru.stqa.tests.pages.TestBase;
 
 import java.util.List;
 
@@ -55,19 +55,20 @@ public class MyThirteenthTask extends TestBase {
         List<WebElement> prodList;
         boolean flag;
 
-        flag = isElementNotPresent(By.cssSelector("#box-checkout-cart .shortcuts"));
+        flag = areElementsPresent(By.cssSelector("#box-checkout-cart .shortcuts"));
+        if (flag) {
+            do {
+                prodList = driver.findElements(By.cssSelector("#box-checkout-cart .shortcuts>li>a"));
+     //           System.out.println("G ->" + prodList.size());
+                prodList.get(0).click();
+                driver.findElements(By.cssSelector(".item button[name=remove_cart_item]")).get(0).click();
 
-        do {
-            prodList = driver.findElements(By.cssSelector("#box-checkout-cart .shortcuts>li>a"));
- //           System.out.println("G ->" + prodList.size());
-            prodList.get(0).click();
-            driver.findElements(By.cssSelector(".item button[name=remove_cart_item]")).get(0).click();
+                WebDriverWait wait = new WebDriverWait(driver, 10/*seconds*/);
+                wait.until(ExpectedConditions.stalenessOf(prodList.get(0)));
+                flag = isElementNotPresent(By.cssSelector("#box-checkout-cart .shortcuts"));
 
-            WebDriverWait wait = new WebDriverWait(driver, 10/*seconds*/);
-            wait.until(ExpectedConditions.stalenessOf(prodList.get(0)));
-            flag = isElementNotPresent(By.cssSelector("#box-checkout-cart .shortcuts"));
-
-        }while (!flag);
+            }while (!flag);
+        }
 
         driver.findElements(cssSelector(".item button[name=remove_cart_item]")).get(0).click();
         driver.findElement(cssSelector("#logotype-wrapper>a>img")).click();
